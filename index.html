@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Productivity Hub</title>
+    
+    <!-- BARIS TAMBAHAN UNTUK MENAMPILKAN LOGO/FAVICON -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER SECTION: Greeting, Time, Theme, Name -->
+        <header class="header-section">
+            <div class="header-main">
+                <div class="greeting-area">
+                    <h1 id="greeting">Halo, <span id="username" contenteditable="true" title="Klik untuk mengubah nama">User</span></h1>
+                    <p id="date-time-display">Memuat waktu...</p>
+                </div>
+              <!-- Mengubah tombol lama menjadi sakelar tali lampu -->
+                <div class="light-switch-container">
+                    <div class="switch-line"></div>
+                    <button id="theme-toggle" class="switch-knob" title="Tarik untuk mengubah tema">🌙</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-grid">
+            <!-- LEFT COLUMN: Timer & Quick Links -->
+            <div class="left-column">
+                <!-- FOCUS TIMER -->
+                <section class="card timer-card">
+                    <h2>⏱️ Focus Timer</h2>
+                    
+                    <!-- Timer Presets (Change Pomodoro Time) -->
+                    <div class="timer-presets">
+                        <button class="btn-preset" data-time="15">15m</button>
+                        <button class="btn-preset active" data-time="25">25m</button>
+                        <button class="btn-preset" data-time="50">50m</button>
+                        <button class="btn-preset" id="custom-time-btn">Custom</button>
+                    </div>
+
+                    <div class="timer-display" id="timer-display">25:00</div>
+                    <div class="timer-controls">
+                        <button id="timer-start" class="btn btn-success">Mulai</button>
+                        <button id="timer-stop" class="btn btn-warning" disabled>Jeda</button>
+                        <button id="timer-reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </section>
+
+                <!-- QUICK LINKS -->
+                <section class="card links-card">
+                    <h2>🔗 Quick Links</h2>
+                    <form id="link-form" class="input-group">
+                        <input type="text" id="link-name" placeholder="Nama Web (contoh: Google)" required>
+                        <input type="url" id="link-url" placeholder="URL (contoh: https://google.com)" required>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </form>
+                    <div id="links-container" class="links-container"></div>
+                </section>
+            </div>
+
+            <!-- RIGHT COLUMN: To-Do List -->
+            <div class="right-column">
+                <section class="card todo-card">
+                    <h2>📝 To-Do List</h2>
+                    <form id="todo-form" class="input-group">
+                        <input type="text" id="todo-input" placeholder="Tambah tugas baru..." required>
+                        <button type="submit" class="btn btn-primary">Tambah</button>
+                    </form>
+
+                    <div class="todo-controls">
+                        <label for="todo-sort">Urutkan:</label>
+                        <select id="todo-sort" class="select-control">
+                            <option value="newest">Terbaru</option>
+                            <option value="oldest">Terlama</option>
+                            <option value="alphabetical">A-Z</option>
+                            <option value="status">Belum Selesai</option>
+                        </select>
+                    </div>
+
+                    <div id="todo-error" class="error-msg" style="display: none;">Tugas tersebut sudah ada di daftar!</div>
+                    <ul id="todo-list" class="todo-list"></ul>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
