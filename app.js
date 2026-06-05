@@ -221,15 +221,26 @@ function handleAddTodo(e) {
 
 function renderTasks() {
     todoList.innerHTML = '';
-    let sorted = [...state.tasks];
     const sortBy = todoSort.value;
     
-    if (sortBy === 'newest') sorted.sort((a, b) => b.createdAt - a.createdAt);
-    else if (sortBy === 'oldest') sorted.sort((a, b) => a.createdAt - b.createdAt);
-    else if (sortBy === 'alphabetical') sorted.sort((a, b) => a.text.localeCompare(b.text));
-    else if (sortBy === 'status') sorted.sort((a, b) => a.completed - b.completed);
+    // 1. BUAT SALINAN DAFTAR UTAMA
+    let filteredAndSorted = [...state.tasks];
+    
+    // 2. LOGIKA BARU: Jika pilih "Belum Selesai", kita filter/sembunyikan yang sudah dicentang
+    if (sortBy === 'status') {
+        filteredAndSorted = filteredAndSorted.filter(t => !t.completed);
+    } 
+    // Logika pengurutan lainnya tetap berjalan normal
+    else if (sortBy === 'newest') {
+        filteredAndSorted.sort((a, b) => b.createdAt - a.createdAt);
+    } else if (sortBy === 'oldest') {
+        filteredAndSorted.sort((a, b) => a.createdAt - b.createdAt);
+    } else if (sortBy === 'alphabetical') {
+        filteredAndSorted.sort((a, b) => a.text.localeCompare(b.text));
+    }
 
-    sorted.forEach(t => {
+    // 3. RENDER HASILNYA KE LAYAR
+    filteredAndSorted.forEach(t => {
         const li = document.createElement('li');
         li.className = 'todo-item';
         li.innerHTML = `
